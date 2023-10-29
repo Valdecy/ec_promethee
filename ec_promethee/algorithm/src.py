@@ -296,8 +296,11 @@ class ec_promethee():
             all_weights = [self.entropy_weights[i], self.critic_weights[i]]
             if (self.cset):
                 for custom_set in self.cset:
+                    total = sum(custom_set)
+                    normalized_set = [x/total for x in custom_set] if total else custom_set
                     if (i < len(custom_set)):
-                        all_weights.append(custom_set[i])
+                        all_weights.append(normalized_set[i])
+                        #all_weights.append(custom_set[i])
             lower = min(all_weights)
             lower = max(1e-10, lower)
             upper = max(all_weights)
@@ -308,7 +311,10 @@ class ec_promethee():
         if (self.cset):
             count = 1
             for custom_set in self.cset:
-                weights_data.append(['Custom Weights ' + str(count)] + [custom_set[i] for i in range(len(custom_set))])
+                total = sum(custom_set)
+                normalized_set = [x/total for x in custom_set] if total else custom_set
+                weights_data.append(['Custom Weights ' + str(count)] + normalized_set)
+                #weights_data.append(['Custom Weights ' + str(count)] + [custom_set[i] for i in range(len(custom_set))])
                 count = count + 1
         lower_weights   = ['Lower'] + [lower for lower, upper in lower_upper_pairs]
         upper_weights   = ['Upper'] + [upper for lower, upper in lower_upper_pairs]
