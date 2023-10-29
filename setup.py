@@ -5,7 +5,7 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / 'README.md').read_text()
 
 setup(
-    name='pyDecision',
+    name='ec_promethee',
     version='1.1.9',
     license='GNU',
     author='Valdecy Pereira',
